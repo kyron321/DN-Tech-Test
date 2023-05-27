@@ -1,4 +1,4 @@
-# Digital Native Tech Test
+# Digital Native Technical Challenge
 
 This project is a simple client-server application which allows a user to fill in a form, then sends that form data to a server. The server then sends an email with the form data using the SendGrid API.
 
