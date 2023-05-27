@@ -17,13 +17,13 @@ To get started with this project, you'll need:
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/kyron321/DN-Tech-Test
 ```
 
 2. Navigate to the repository folder:
 
 ```shell
-cd your-repo-name
+cd DN-Tech-Test
 ```
 
 3. Install the dependencies:
