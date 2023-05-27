@@ -11,41 +11,48 @@
     <div class="container">
       <form id="information-form">
         <div class="input-section">
-          <label for="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Enter Your Name"
-            name="name"
-            required
-          />
+          <div class="label-input">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter Your Name"
+              name="name"
+              required
+            />
+          </div>
           <div class="error" id="name-error"></div>
         </div>
 
         <div class="input-section">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter Your Email"
-            required
-          />
+          <div class="label-input">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+              required
+            />
+          </div>
           <div class="error" id="email-error"></div>
         </div>
 
         <div class="input-section">
-          <label for="card">Name:</label>
-          <input
-            type="text"
-            id="card"
-            name="card"
-            placeholder="Enter a Proxy Credit Card Number"
-            required
-          />
+          <div class="label-input">
+            <label for="card">Card:</label>
+            <input
+              type="text"
+              id="card"
+              name="card"
+              placeholder="Enter a Proxy Credit Card Number"
+              required
+            />
+          </div>
           <div class="error" id="card-error"></div>
         </div>
-        <input type="submit" value="Submit" />
+
+        <button type="submit" value="Submit">Submit</button>
       </form>
       <div id="form-errors" class="form-error"></div>
     </div>

@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showError(input, message) {
-    input.nextElementSibling.textContent = message;
-    input.nextElementSibling.style.display = "block";
+    input.parentNode.nextElementSibling.textContent = message;
+    input.parentNode.nextElementSibling.style.display = "block";
     input.style.backgroundColor = "#ffebec";
   }
 
   function hideError(input) {
-    input.nextElementSibling.textContent = "";
-    input.nextElementSibling.style.display = "none";
+    input.parentNode.nextElementSibling.textContent = "";
+    input.parentNode.nextElementSibling.style.display = "none";
     input.style.backgroundColor = "#e2f2cc";
   }
 
@@ -107,8 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(data);
         form.reset(); // Clear the form after successful submission
         fields.forEach(({ element }) => {
-          element.style.backgroundColor = "transparent";
+          element.style.backgroundColor = "#fff";
         });
+        showFormError("Thank you! Your card details have been submitted.");
       })
       .catch((error) => {
         console.error("Error:", error);
