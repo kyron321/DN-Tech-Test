@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -55,6 +57,10 @@ header {
   width: 40px;
   height: 40px;
   cursor: pointer;
+}
+
+h1 {
+  font-family: "Roboto", sans-serif;
 }
 
 .form-container {
@@ -136,12 +142,16 @@ footer {
   padding: 10px 0;
 }
 
+a:visited {
+  color: inherit; /* or any color of your choice */
+}
+
 .link:hover {
   color: #f43f85;
 }
 
 /* Responsive styles for mobile devices */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   .container {
     width: 90%;
     padding: 2rem;
@@ -158,6 +168,9 @@ footer {
   }
 
   .career-menu {
+    border: none;
+  }
+  .career-text {
     display: none;
   }
 }
