@@ -1,0 +1,26 @@
+{
+  "name": "kyron-tech-test",
+  "version": "1.0.0",
+  "description": "This project is a simple client-server application which allows a user to fill in a form, then sends that form data to a server. The server then sends an email with the form data using the SendGrid API.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyron321/DN-Tech-Test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyron321/DN-Tech-Test/issues"
+  },
+  "homepage": "https://github.com/kyron321/DN-Tech-Test#readme",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}

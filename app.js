@@ -1,72 +1,117 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nameInfo = document.getElementById("name");
-  const emailInfo = document.getElementById("email");
-  const cardInfo = document.getElementById("card");
+  const form = document.getElementById("information-form");
+  const formErrors = document.getElementById("form-errors");
 
-  nameInfo.addEventListener("input", () => {
-    const name = nameInfo.value.trim();
-    const nameTest = /^[a-zA-Z!#$%&'*+\-/=?^_`{|}~\s]+$/;
-    if (!nameTest.test(name)) {
-      showError(nameInfo, "Please enter a valid name.");
-    } else {
-      hideError(nameInfo);
-    }
+  const fields = [
+    {
+      element: document.getElementById("name"),
+      regex: /^[a-zA-Z!#$%&'*+\-/=?^_`{|}~\s]+$/,
+      errorMsg: "Please enter a valid name.",
+    },
+    {
+      element: document.getElementById("email"),
+      regex: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+      errorMsg: "Please enter a valid email address",
+    },
+    {
+      element: document.getElementById("card"),
+      regex: /^[0-9]+$/,
+      errorMsg: "Please enter a valid credit card number",
+      extraValidation: validateCreditCard,
+      extraErrorMsg: "Invalid credit card number",
+    },
+  ];
+
+  fields.forEach((field) => {
+    field.element.addEventListener("input", () => validateField(field));
   });
 
-  emailInfo.addEventListener("input", () => {
-    const email = emailInfo.value.trim();
-    const emailTest = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    if (!emailTest.test(email)) {
-      showError(emailInfo, "Please enter a valid email address");
-    } else {
-      hideError(emailInfo);
-    }
-  });
-
-  cardInfo.addEventListener("input", () => {
-    const card = cardInfo.value.trim();
-    const numericTest = /^[0-9]+$/;
-    if (!numericTest.test(card)) {
-      showError(cardInfo, "Please enter a valid credit card number");
-    } else if (!validateCreditCard(card)) {
-      showError(cardInfo, "Invalid credit card number");
-    } else {
-      hideError(cardInfo);
-    }
-  });
+  function validateField(field) {
+    const { element, regex, errorMsg, extraValidation, extraErrorMsg } = field;
+    const value = element.value.trim();
+    const isValid =
+      regex.test(value) && (!extraValidation || extraValidation(value));
+    element.dataset.valid = isValid ? "true" : "false";
+    isValid ? hideError(element) : showError(element, errorMsg);
+  }
 
   function showError(input, message) {
-    const errorDiv = input.nextElementSibling;
-    errorDiv.textContent = message;
-    errorDiv.style.display = "block";
+    input.nextElementSibling.textContent = message;
+    input.nextElementSibling.style.display = "block";
     input.style.backgroundColor = "#ffebec";
   }
 
   function hideError(input) {
-    const errorDiv = input.nextElementSibling;
-    errorDiv.textContent = "";
-    errorDiv.style.display = "none";
+    input.nextElementSibling.textContent = "";
+    input.nextElementSibling.style.display = "none";
     input.style.backgroundColor = "#e2f2cc";
   }
 
+  function showFormError(message) {
+    formErrors.textContent = message;
+    formErrors.style.display = "block";
+  }
+
+  function hideFormError() {
+    formErrors.textContent = "";
+    formErrors.style.display = "none";
+  }
+
   function validateCreditCard(cardNumber) {
-    let digits = cardNumber.split("").map(Number);
+    const digits = Array.from(cardNumber, Number);
     let oddSum = 0;
     let evenSum = 0;
-    let len = digits.length;
 
-    for (let i = 0; i < len; i++) {
-      if ((len - i) % 2 === 0) {
-        let val = 2 * digits[i];
+    digits.forEach((digit, index) => {
+      if ((digits.length - index) % 2 === 0) {
+        let val = 2 * digit;
         if (val > 9) {
           val -= 9;
         }
         evenSum += val;
       } else {
-        oddSum += digits[i];
+        oddSum += digit;
       }
-    }
+    });
 
     return (oddSum + evenSum) % 10 === 0;
   }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const hasErrors = fields.some(
+      (field) => field.element.dataset.valid === "false"
+    );
+    if (hasErrors) {
+      showFormError("Please correct the errors in the form before submitting.");
+      return;
+    }
+
+    hideFormError();
+    const { name, email, card } = form.elements;
+    const payload = { name: name.value, email: email.value, card: card.value };
+
+    fetch("http://localhost:3000/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        form.reset(); // Clear the form after successful submission
+        fields.forEach(({ element }) => {
+          element.style.backgroundColor = "transparent";
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 });

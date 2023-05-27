@@ -9,10 +9,16 @@
   </head>
   <body>
     <div class="container">
-      <form id="infomation-form">
+      <form id="information-form">
         <div class="input-section">
           <label for="name">Name:</label>
-          <input type="text" id="name" placeholder="Enter Your Name" required />
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter Your Name"
+            name="name"
+            required
+          />
           <div class="error" id="name-error"></div>
         </div>
 
@@ -21,6 +27,7 @@
           <input
             type="email"
             id="email"
+            name="email"
             placeholder="Enter Your Email"
             required
           />
@@ -32,13 +39,15 @@
           <input
             type="text"
             id="card"
+            name="card"
             placeholder="Enter a Proxy Credit Card Number"
             required
           />
           <div class="error" id="card-error"></div>
         </div>
+        <input type="submit" value="Submit" />
       </form>
-      <button type="submit">Submit</button>
+      <div id="form-errors" class="form-error"></div>
     </div>
     <script src="app.js"></script>
   </body>
