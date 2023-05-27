@@ -73,7 +73,7 @@ button {
 @media screen and (max-width: 480px) {
   .container {
     width: 90%;
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .label-input {
@@ -83,6 +83,6 @@ button {
   }
 
   button {
-    width: 100%;
+    width: 50%;
   }
 }
