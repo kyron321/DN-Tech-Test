@@ -4,9 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Kyron Digial Native</title>
   </head>
   <body>
-    
+    <div class="container">
+      <form id="infomation-form">
+        <div class="input-section">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Enter Your Name" required />
+        </div>
+        <div class="error" id="name-error"></div>
+        <div class="input-section">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter Your Email"
+            required
+          />
+        </div>
+        <div class="error" id="email-error"></div>
+        <div class="input-section">
+          <label for="card">Name:</label>
+          <input
+            type="text"
+            id="card"
+            placeholder="Enter a Proxy Credit Card Number"
+            required
+          />
+        </div>
+        <div class="error" id="card-error"></div>
+      </form>
+      <button type="submit">Submit</button>
+    </div>
   </body>
 </html>
