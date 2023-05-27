@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nameInfo = document.getElementById("name");
+  const emailInfo = document.getElementById("email");
 
   nameInfo.addEventListener("input", () => {
     const name = nameInfo.value.trim();
@@ -8,6 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
       showError(nameInfo, "Please enter a valid name.");
     } else {
       hideError(nameInfo);
+    }
+  });
+
+  emailInfo.addEventListener("input", () => {
+    const email = emailInfo.value.trim();
+    const emailTest = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailTest.test(email)) {
+      showError(emailInfo, "Please enter a valid email address");
+    } else {
+      hideError(emailInfo);
     }
   });
 
@@ -20,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function hideError(input) {
     const errorDiv = input.nextElementSibling;
-    errorDiv.textContent = ""; 
+    errorDiv.textContent = "";
     errorDiv.style.display = "none";
     input.style.backgroundColor = "#e2f2cc";
   }
