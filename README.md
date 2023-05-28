@@ -2,6 +2,8 @@
 
 This project is a simple client-server application which allows a user to fill in a form, then sends that form data to a server. The server then sends an email with the form data using the SendGrid API.
 
+![DN Tech Challenge](./src/image/screenshot.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -35,6 +37,8 @@ npm install
 ### Configuring SendGrid
 
 You need to set your SendGrid API Key as an environment variable for the server to use. This keeps the key secure and not exposed in your code.
+
+![SendGrid](./src/image/sendgrid.png)
 
 On UNIX systems (Linux/macOS), you can do this in your terminal:
 
