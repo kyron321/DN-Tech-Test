@@ -136,8 +136,18 @@ footer {
   padding: 10px 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 a:visited {
   color: inherit; /* or any color of your choice */
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .link:hover {
