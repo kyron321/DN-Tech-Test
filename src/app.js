@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((data) => {
         console.log(data);
-        form.reset(); // Clear the form after successful submission
+        form.reset();
         fields.forEach(({ element }) => {
           element.style.backgroundColor = "#fff";
         });

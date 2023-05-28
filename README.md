@@ -23,7 +23,7 @@ git clone https://github.com/kyron321/DN-Tech-Test
 2. Navigate to the repository folder:
 
 ```shell
-cd DN-Tech-Test
+cd Task 3
 ```
 
 3. Install the dependencies:
