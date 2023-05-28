@@ -27,10 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function validateField(field) {
-    const { element, regex, errorMsg, extraValidation, extraErrorMsg } = field;
+    const { element, regex, errorMsg, extraValidation } = field;
     const value = element.value.trim();
     const isValid =
-      regex.test(value) && (!extraValidation || extraValidation(value));
+      isValidInput(value, regex) &&
+      (!extraValidation || extraValidation(value));
     element.dataset.valid = isValid ? "true" : "false";
     isValid ? hideError(element) : showError(element, errorMsg);
   }
@@ -55,26 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function hideFormError() {
     formErrors.textContent = "";
     formErrors.style.display = "none";
-  }
-
-  function validateCreditCard(cardNumber) {
-    const digits = Array.from(cardNumber, Number);
-    let oddSum = 0;
-    let evenSum = 0;
-
-    digits.forEach((digit, index) => {
-      if ((digits.length - index) % 2 === 0) {
-        let val = 2 * digit;
-        if (val > 9) {
-          val -= 9;
-        }
-        evenSum += val;
-      } else {
-        oddSum += digit;
-      }
-    });
-
-    return (oddSum + evenSum) % 10 === 0;
   }
 
   form.addEventListener("submit", (e) => {
@@ -116,3 +97,32 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
+function validateCreditCard(cardNumber) {
+  const digits = Array.from(cardNumber, Number);
+  let oddSum = 0;
+  let evenSum = 0;
+
+  digits.forEach((digit, index) => {
+    if ((digits.length - index) % 2 === 0) {
+      let val = 2 * digit;
+      if (val > 9) {
+        val -= 9;
+      }
+      evenSum += val;
+    } else {
+      oddSum += digit;
+    }
+  });
+
+  return (oddSum + evenSum) % 10 === 0;
+}
+
+function isValidInput(input, regex) {
+  return regex.test(input);
+}
+
+module.exports = {
+  isValidInput,
+  validateCreditCard,
+};
